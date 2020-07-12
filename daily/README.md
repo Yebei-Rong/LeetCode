@@ -1,8 +1,10 @@
 #### 每日记录(按tag和难易程度顺序）
 
-* 1051. heightChecker
+* 1051 heightChecker
 
 https://leetcode-cn.com/problems/height-checker/
+
+本题的重点在于关注元素是否出现在正确的位置上，而非最后的排序结果。
 
 ``` Java
 public class Solution {
