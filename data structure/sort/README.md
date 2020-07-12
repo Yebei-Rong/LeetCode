@@ -17,10 +17,19 @@ public class SortTest {
 		int[] arr1 = {1,4,2,1,9,6};
 		int[] arr2 = {100,99,98,97,96};
 		int[] arr3 = {};
-		
+		// test countSort1
 		System.out.println(Arrays.toString(countSort1(arr1)));
 		System.out.println(Arrays.toString(countSort1(arr2)));
 		System.out.println(Arrays.toString(countSort1(arr3)));
+		
+		// test countSort2
+		int[] arr4 = {630, 629, 750, 630, 645, 620, 629};
+		int minVal = findMin(arr4);
+		int maxVal = findMax(arr4);
+		
+		//System.out.println(minVal + ", " + maxVal);
+		
+		System.out.println(Arrays.toString(countSort2(arr4, minVal, maxVal)));
 	}
 	
 	public static int[] countSort1(int[] arr) {
