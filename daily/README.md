@@ -4,7 +4,7 @@
 
 https://leetcode-cn.com/problems/height-checker/
 
-本题的重点在于关注元素是否出现在正确的位置上，而非最后的排序结果。
+本题的重点在于关注元素是否出现在正确的位置上，而非最后的排序结果。因为题目中给出heighs数组的取值范围为1 <= heights[i] <= 100，就应该想到用桶排序-计数排序的思想。因为如果数组取值为0到某数时，计数排序是最简单的，并且适用于数据量大但取值范围小的情况。
 
 ``` Java
 public class Solution {
@@ -19,7 +19,7 @@ public class Solution {
 		
 		// 桶排序的思想，循环结束后arr中下标为1的元素表示heights中1出现的次数；下标为2的元素表示2出现的次数；
 		// 以此类推，直至heights所有元素循环结束；
-		// 所以arr记录了heights中每个数（从小到大）出现的次数。
+		// arr[i]: 在heights中整数i出现的次数。
 		// i.e. heights = {1,1,4,2,1,3,8}; arr = {0,3,1,1,1,0,0,0,1,0,0,...,0}
 		for (int height : heights) {
 			arr[height]++;
