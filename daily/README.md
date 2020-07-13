@@ -50,3 +50,31 @@ public class Solution {
  */
 
 ```
+
+* 剑指offer 53 0~n-1中缺失的数字
+
+https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/
+
+这道题思路和上一题很像，也是运用了计数排序的思想，得到每个0~n-1的数字出现的次数count数组，然后再用一次循环找到count数组中为0的元素即break，然后返回该元素下标。
+
+```
+    public int missingNumber(int[] nums) {
+        int result = 0;
+        int[] count = new int[nums.length+1];
+
+        // count array
+        for (int i : nums){
+            count[i]++;
+        }
+
+        // find the missing value
+        for (int j=0; j<count.length; j++){
+            if (count[j] == 0){
+                result = j;
+                break;
+            }
+        }
+
+        return result;
+    }
+```
