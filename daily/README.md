@@ -133,6 +133,53 @@ https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/
 	}  
 ```
 
+* 剑指offer 29. 顺时针打印矩阵
+
+https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/
+
+示例 1：
+
+输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]
+输出：[1,2,3,6,9,8,7,4,5]
+
+参考精选答案，初始化了left right top bottom四个变量，以及res数组存储结果，分四个循环（代表四个方向）去顺时针打印input矩阵。
+
+``` Java
+    public int[] spiralOrder(int[][] matrix) {
+		/*
+		 * return a 1D array of the input 2Dmatrix by clock wise order
+		 * 
+		 * input matrix: 2D integer matrxi
+		 */
+		if (matrix.length == 0) return new int[0];
+		
+		// initialize 
+		int l = 0, r = matrix[0].length - 1, t = 0, b = matrix.length -1;
+		int[] res = new int[(r+1)*(b+1)];
+		int count = 0;
+		
+		while(true) {
+			// Left to right, t++ until t > b
+			for (int i = l; i<=r; i++) res[count++] = matrix[t][i];
+			if (++t > b) break;
+			
+			// Top to bottom, r-- until r < l
+			for (int i = t; i<=b; i++) res[count++] = matrix[i][r];
+			if (--r < l) break;
+			
+			// Right to left, b-- until t > b
+			for (int i = r; i>=l; i--) res[count++] = matrix[b][i];
+			if (--b < t) break;
+			
+			// Bottom to top, l++ until l > r
+			for (int i = b; i>=t; i--) res[count++] = matrix[i][l];
+			if (++l > r) break;
+		}
+		
+		return res;
+    }
+```
+
 
 
 
