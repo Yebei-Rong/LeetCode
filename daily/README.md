@@ -78,6 +78,60 @@ https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/
 时间复杂度：O(logN)
 空间复杂度：O(1)
 
+* 剑指offer 53 I 在排序数组中查找数字出现的次数
+
+https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/
+
+示例 1:
+
+输入: nums = [5,7,7,8,8,10], target = 8， 输出: 2
+
+示例 2:
+
+输入: nums = [5,7,7,8,8,10], target = 6， 输出: 0
+
+1. 思路1: 遍历整个数组，有就+1，一直到最后都没有就返回0
+
+2. 思路2: 通过两次二分法找左、右边界，最终返回right-left-1即为出现次数。
+
+``` Java
+    public int search(int[] nums, int target) {
+		/*
+		 * return the number of the target in the input array
+		 * 
+		 * input nums: an ordered integer array, 0<=nums.length <=50000
+		 * input target: an input number
+		 */
+
+		int left = 0, right = nums.length - 1;
+		int i = 0, m = 0, j = nums.length - 1;
+		
+		// Step 1: find the right border using 
+		// nums = {5,7,7,8,8,8,9} right = 6
+		while (i<=j) {
+			m = (i + j)/2;
+			
+			if (nums[m] <= target)  i = m + 1;
+			else j = m - 1;
+		}
+		right = i;
+		
+		// Step 2: chech if target is in the input array
+		if (j > 0 && nums[j] != target) return 0;
+		
+		// Step 3: find the left border
+		i = 0; 
+		while (i<=j) {
+			m = (i+j)/2;
+			
+			if (nums[m]<target) i = m + 1;
+			else j = m - 1;
+		}
+		left = j;
+		
+		return (right - left - 1);
+	}  
+```
 
 
 
