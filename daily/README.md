@@ -55,26 +55,30 @@ public class Solution {
 
 https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/
 
-这道题思路和上一题很像，也是运用了计数排序的思想，得到每个0~n-1的数字出现的次数count数组，然后再用一次循环找到count数组中为0的元素即break，然后返回该元素下标。
+这道题的关键是数组本身是有序的，目的是查找长度为n-1的该递增排序数组中缺失的数。“排序数组中的搜索问题，首先想到**二分法**解决。“（参考leetcode中这一题的精选思路）
 
 ``` Java
-    public int missingNumber(int[] nums) {
-        int result = 0;
-        int[] count = new int[nums.length+1];
-
-        // count array
-        for (int i : nums){
-            count[i]++;
-        }
-
-        // find the missing value
-        for (int j=0; j<count.length; j++){
-            if (count[j] == 0){
-                result = j;
-                break;
-            }
-        }
-
-        return result;
-    }
+	public int missingNumber(int[] nums) {
+		/**
+		 * return the missing value in the input array nums.
+		 * input nums: an ordered integer array. length = n - 1 and 0 <= nums[i] <= n-1
+		 */
+		
+		int i = 0, j = nums.length - 1;
+		
+		while (i <= j) {
+			int m = (i + j)/2;
+			if (nums[m] != m) j = m - 1;
+			else i = m + 1;
+		}
+		
+		return i;
+	}	
 ```
+时间复杂度：O(logN)
+空间复杂度：O(1)
+
+
+
+
+
