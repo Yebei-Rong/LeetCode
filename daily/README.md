@@ -221,5 +221,61 @@ https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/
     }
 ```
 
+* 剑指offer 03. 数组中重复的数字
+
+https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
+
+本题旨在找到一个在输入数组nums中重复出现过的数字，是任意的，所以只要找到返回即可。首先需要考虑特殊情况，nums 为null/长度小于等于1时，此时返回-1（无重复元素）。
+
+1. 方法一：哈希集合
+
+一般情况下，解决这个问题我们可以创建一个HashSet对象，向里面添加元素，add方法会自动判断里面的元素是否有相同，从而保证元素的唯一。
+
+``` Java
+	public static int findRepeatNumber(int[] nums) {
+		/*
+		 * return one integer in nums if it is repeated
+		 * 
+		 * input nums: a n length 1D array, 0 <= nums[i] <= n-1, 2 <= nums.length <= 100000
+		 */
+		if (nums == null || nums.length <= 1) return -1; // repeated number not found
+		
+		Set<Integer> set = new HashSet<Integer>();
+		
+		for (int num: nums) {
+			if (! set.add(num)) return num;
+		}
+		
+		return -1; // repeated number not found
+	}
+
+```
+时间复杂度：O（n），空间复杂度：O（n）最坏的情况是没有重复的元素，所有元素都会被存入哈希集合中。
+
+2. 方法二：原地置换
+
+注意这道数组题依旧是长度为n的数组，数组元素在0～n-1范围内，意味着如果无重复元素。所以思路为遍历nums数组，下标为i，下标指向的数记为m，如果m！=i并且则将该数和nums[m]交换（m应该出指向nums[m]）,如果m==nums[m]则表示又重复数字发生，终止循环返回m。
+
+``` Java
+	public static int findRepeatNumber2(int[] nums) {
+		if (nums == null || nums.length <= 1) return -1; // repeated number not found
+		
+		for (int i = 0; i < nums.length; i++) {
+			int m = nums[i];
+			if (m != i) {
+				if (nums[i] == nums[nums[i]]) return m;
+				else {
+					nums[i] = nums[nums[i]];
+					nums[nums[i]] = m;
+				}
+				
+			}
+		}
+		return -1;
+	}
+```
+
+
+
 
 
