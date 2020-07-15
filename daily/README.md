@@ -180,6 +180,46 @@ https://leetcode-cn.com/problems/shun-shi-zhen-da-yin-ju-zhen-lcof/
     }
 ```
 
+* 剑指 Offer 04. 二维数组中的查找
+
+https://leetcode-cn.com/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/
+
+因输入数组在行、列上都是有序的（递增），所以从右上角开始，查找target数。
+
+``` Java
+    public static boolean findNumberIn2DArray(int[][] matrix, int target) {
+        /*
+        * return if target exists in the input matrix
+        * input matrix: a 2D n*m integer matrix (increasing in row and column), 0 <= n <= 1000, 0 <= m <= 1000
+        * input matrix: an integer
+        */
+
+        // Condition 1: matrix is null or matrix is empty
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0){
+            return false;
+        }
+
+        // Condition 2:
+        int rows = matrix.length;
+        int columns = matrix[0].length;
+        int row = 0;
+        int column = columns - 1; // start searching from the ipper-right point
+
+        while (row < rows && column >= 0){
+            int num = matrix[row][column]; // store the number in variable num becasue we need to use it later
+
+            if (target == num) {
+                return true;
+            }else if(target < num) {
+                column--;
+            }else {
+                row++;
+            }
+        }
+
+        return false;
+    }
+```
 
 
 
