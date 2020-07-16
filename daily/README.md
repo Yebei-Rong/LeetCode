@@ -260,6 +260,7 @@ https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
 	public static int findRepeatNumber2(int[] nums) {
 		if (nums == null || nums.length <= 1) return -1; // repeated number not found
 		
+		
 		for (int i = 0; i < nums.length; i++) {
 			int m = nums[i];
 			if (m != i) {
@@ -275,7 +276,34 @@ https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
 	}
 ```
 
+* 53. 最大子序和
 
+https://leetcode-cn.com/problems/maximum-subarray/
 
+方法一：动态规划算法
 
+``` Java
+    public int maxSubArray(int[] nums) {
+        if (nums.length == 1) return nums[0];
 
+        int sum = 0;
+        int max = nums[0];
+
+        for (int i = 0; i < nums.length; i++){
+            sum += nums[i];
+
+            if (sum > max){
+                max = sum;
+            }
+            if (sum < 0){
+                sum = 0;
+            }
+        }
+	
+        return max;
+    }
+```
+
+时间复杂度： O(n)
+
+方法二：分治法
