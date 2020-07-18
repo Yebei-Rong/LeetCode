@@ -36,24 +36,7 @@ public class Solution {
 	}
 }
 /**
- * heights = {1,1,4,2,1,3,8};
- * i = 1, j = 0: arr[1]=3>0, height[0]==i; arr[1]=2>0,height[1]==i; arr[1]=1,heights[2]=4!=1, count++
- * i = 2, j = 3: arr[2]=1>0, height[3]==2;
- * i = 3, j = 4: arr[3]=1>0, height[4]=1!=i, count++;
- * i = 4, j = 5: arr[4]=1>0, height[5]=3!=i, count++;
- * i = 5, j = 6: arr[5]==0
- * i = 6, j = 6: arr[6]==0
- * i = 7, j = 6: arr[7]==0
- * i = 8, j = 6: arr[8]=1>0, height[6]=8==i
- * i > 8, arr[i] == 0
- * count = 3; return count;
- */
-
-```
-
-* 剑指offer 53 0~n-1中缺失的数字
-
-https://leetcode-cn.com/problems/que-shi-de-shu-zi-lcof/
+ * heights = {1,1,4,2,1,3,8};hu-zi-lcof/
 
 这道题的关键是数组本身是有序的，目的是查找长度为n-1的该递增排序数组中缺失的数。“排序数组中的搜索问题，首先想到**二分法**解决。“（参考leetcode中这一题的精选思路）
 
@@ -280,7 +263,7 @@ https://leetcode-cn.com/problems/shu-zu-zhong-zhong-fu-de-shu-zi-lcof/
 
 https://leetcode-cn.com/problems/maximum-subarray/
 
-方法一：动态规划算法
+方法一：贪心算法。当前和小于0的时候，就舍弃当前和代表的子序列，将sum变量重置为0。
 
 ``` Java
     public int maxSubArray(int[] nums) {
@@ -304,6 +287,128 @@ https://leetcode-cn.com/problems/maximum-subarray/
     }
 ```
 
-时间复杂度： O(n)
+时间复杂度： O(n)，只遍历了一次数组；空间复杂度：O(1)，只使用了常数空间
 
 方法二：分治法
+
+``` Java
+	public static int maxSum(int[] sequence, int left, int right) {
+		if (left == right) {
+			if (sequence[left] > 0)
+				return sequence[left];
+			else
+				return 0;
+		}
+		
+		int mid = (left + right) / 2;
+		int maxLeftSum = maxSum(sequence, left, mid);
+		int maxrightSum = maxSum(sequence, mid+1, right);
+		
+		int leftBorderSum = 0, maxLeftBorderSum = 0;
+		for (int i = mid; i >= left; i--) {
+			leftBorderSum += sequence[i];
+			if (leftBorderSum > maxLeftBorderSum)
+				maxLeftBorderSum = leftBorderSum;
+			
+		}
+		
+		int rightBorderSum = 0, maxRightBorderSum = 0;
+		for (int i = mid+1; i <= right; i++) {
+			rightBorderSum += sequence[i];
+			if (rightBorderSum > maxRightBorderSum)
+				maxRightBorderSum = rightBorderSum;
+		}
+		
+		return max3(maxLeftSum, maxRightBorderSum, maxLeftBorderSum + maxRightBorderSum);
+	}
+	
+	public static int max3(int a, int b, int c) {
+		int max = (a>b)? a:b;
+		max = (max>c)? max:c;
+		
+		return max;
+```
+
+* 剑指 Offer 58 - I. 翻转单词顺序
+
+方法一：使用空格分割字符串
+
+``` Java
+    public String reverseWords(String s) {
+        /*
+        * input: "  the sky is blue!"
+        * output: "blue! is sky the"
+        */
+
+        String res = "";
+        String[] split = s.trim().split("\\s+");
+
+        int length = split.length;
+
+        if (length <= 1) return s.trim();
+
+        for (int i = length-1; i >= 0; i--){
+            if (i==0){
+                res += split[0];
+            }else{
+                res += (split[i] + " ");
+            }
+        }
+
+        return res;
+    }
+```
+
+时间复杂度：O(n), 遍历一遍split过后的字符串数组；空间复杂度：O(n), 创建空间给result字符串和字符串数组
+
+注意：由于trim，split为内置函数，面试时不建议使用该方法。
+
+方法二：双指针
+
+首先，将字符串首末的空格删去；接着，初始化新的字符串""res存储结果，以及i，j两个指针，指向最后一个字符。
+
+其次，（1）从字符串末尾开始，j指向单词的最后一个字符，对i进行i--操作直到找到一个空格；（2）取s[i+1, j+1] + “ ” 加到res中；（3）继续i--跳过相邻单词中的空格；（4）将i赋给j，此时j指向下一个单词的最后一个字符。
+
+最后返回res.trim()
+
+``` Java
+    public String reverseWords(String s) {
+        /*
+        * input: "  the sky is blue!"
+        * output: "blue! is sky the"
+        */
+		s = s.trim();
+
+		String res = "";
+		int j = s.length()-1;
+		int i = j;
+			
+		while (i >= 0) {
+			// Step 1: find the first blank space
+			while(i >= 0 && s.charAt(i) != ' ') 
+				i--;
+			// Step 2: append the substring s[i+1, j+1] to the result string also ' ' 
+			res += (s.substring(i+1, j+1) + ' ');
+			// Step 3: skip blank spaces between 2 words
+			while (i >= 0 && s.charAt(i) == ' ')
+				i--;
+			// Step 4: let j = i, so j points to the end of the next word
+			j = i;
+				
+		}
+			
+		return res.trim();
+
+    }
+```
+
+
+
+
+
+
+
+
+
+
+
