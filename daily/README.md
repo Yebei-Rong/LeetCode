@@ -331,7 +331,7 @@ https://leetcode-cn.com/problems/maximum-subarray/
 
 * 剑指 Offer 58 - I. 翻转单词顺序
 
-方法一：使用空格分割字符串
+1. 方法一：使用空格分割字符串
 
 ``` Java
     public String reverseWords(String s) {
@@ -363,7 +363,7 @@ https://leetcode-cn.com/problems/maximum-subarray/
 
 注意：由于trim，split为内置函数，面试时不建议使用该方法。
 
-方法二：双指针
+2. 方法二：双指针
 
 首先，将字符串首末的空格删去；接着，初始化新的字符串""res存储结果，以及i，j两个指针，指向最后一个字符。
 
@@ -402,8 +402,24 @@ https://leetcode-cn.com/problems/maximum-subarray/
     }
 ```
 
+时间复杂度：O(n), 遍历了字符串；空间复杂度：O(n)，新建了res字符串存储结果。
 
+* 剑指 Offer 58 - II. 左旋转字符串
 
+本题思路很简单，主要运用了java字符串的内置方法substring，直接附上代码：
+
+``` Java
+    public String reverseLeftWords(String s, int n) {
+        assert n < s.length() && n >= 1: "Input n is wrong. Please check and input again.";
+
+        String res = "";
+
+        res = s.substring(n, s.length()) + s.substring(0,n);
+        
+        return res;
+
+    }
+```
 
 
 
