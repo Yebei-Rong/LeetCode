@@ -425,7 +425,7 @@ https://leetcode-cn.com/problems/maximum-subarray/
 
 https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/
 
-![offer67](https://github.com/Yebei-Rong/LeetCode/blob/master/image/offer67.jpg?raw=true)
+![offere67](https://github.com/Yebei-Rong/LeetCode/blob/master/image/offere67.jpg?raw=true)
 
 ``` Java
     public int strToInt(String str) {
