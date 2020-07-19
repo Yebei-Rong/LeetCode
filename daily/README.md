@@ -421,10 +421,34 @@ https://leetcode-cn.com/problems/maximum-subarray/
     }
 ```
 
+* 剑指 Offer 67. 把字符串转换成整数
 
+https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/
 
+![offer67](https://github.com/Yebei-Rong/LeetCode/blob/master/image/offer67.jpg?raw=true)
 
+``` Java
+    public int strToInt(String str) {
+        char[] characters = str.trim().toCharArray();
+        if (characters.length == 0) return 0;
 
-
+        int res = 0;
+        int bndry = Integer.MAX_VALUE / 10;
+        int i = 1;
+        int sign = 1; // 1: positive, -1: negative
+    
+        if (characters[0] == '-') sign = -1;
+        else if (characters[0] != '+') i = 0;
+        
+        for (int j = i; j < characters.length; j++) {
+        	if(characters[j] > '9' || characters[j] < '0') break;
+        	if (res > bndry || res == bndry && characters[j] > '7') return sign == 1 ? Integer.MAX_VALUE: Integer.MIN_VALUE;
+        	
+        	res = res * 10 + (characters[j] - '0');     	
+        }
+  
+        return sign * res;        
+    }
+```
 
 
