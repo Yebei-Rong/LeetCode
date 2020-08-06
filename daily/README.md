@@ -1,5 +1,7 @@
 #### 每日记录(按tag和难易程度顺序）
 
+刷题顺序为：数组-> 链表-> 哈希表->字符串->栈与队列->树。
+
 * 1051 heightChecker
 
 https://leetcode-cn.com/problems/height-checker/
@@ -450,5 +452,3 @@ https://leetcode-cn.com/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/
         return sign * res;        
     }
 ```
-
-
